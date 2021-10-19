@@ -23,55 +23,75 @@ def find_word(string_list):
     """ Return a list of words that contain three digit numbers in the middle. """
 
     # initialize an empty list
+    words = []
 
     # define the regular expression
+    reg_expression = r'\b[A-Za-z]+[0-9]{3}[A-Za-z]+\b'
 
     # loop through each line of the string list 
+    for line in string_list:
 
     # find all the words that match the regular expression in each line
+        found_words = re.findall(reg_expression, line)
     
     # loop through the found words and add the words to your empty list 
+        for word in found_words:
+            words.append(word)
 
     #return the list of all words that start with the letter B, E, or T
-    pass
+    return words
 
 
 def find_days(string_list):
     """ Return a list of days from the list of strings the dates format in the text are MM/DD/YYYY. """  
 
     # initialize an empty list
+    days = []
 
     # define the regular expression
+    reg_expression = r'(\b[0-9]{1,2}[\/]([0-9]{1,2})[\/]([0-9]{4})\b)'
 
     # loop through each line of the string list
+    for line in string_list:
     
     # find all the dates that match the regular expression in each line
+        found_dates = re.findall(reg_expression, line)
     
     # loop through the found dates and only add the days to your empty list 
+        for date in found_dates:
+            days.append(date[1])
     
     #return the list of days
-    pass
+    return days
 
 def find_domains(string_list):
     """ Return a list of web address domains from the list of strings the domains of a wbsite are after www. """
 
     # initialize an empty list
+    domains = []
 
     # define the regular expression
+    reg_expression = r'https?://[[a-zA-Z0-9_.]+'
 
     # loop through each line of the string list
+    for line in string_list:
 
     # find all the domains that match the regular expression in each line
+        found_domains = re.findall(reg_expression, line)
 
     # loop through the found domains
+        for domain in found_domains:
 
     # get the domain name by splitting the (//) after the https or http to get the website name
     # then strip the www. to get only the domain name
+            new_domain_split = domain.split('//')[1]
+            new_domain = new_domain_split.strip('www.')
 
     # add the domains to your empty list
+            domains.append(new_domain)
     
     #return the list of domains
-    pass
+    return domains
 
 class TestAllMethods(unittest.TestCase):
 
